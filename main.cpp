@@ -8,6 +8,22 @@
 #include <vector>
 #include "AppUtil.cpp"
 
+int gradientalThing(){
+	int value_limits[2] = {235, 255};
+	static int value = 255;
+	static bool isIncrementing = false;
+
+	if (value <= value_limits[0]){
+		isIncrementing = true;
+	}
+	if (value >= value_limits[1]){
+		isIncrementing = false;
+	}
+
+	value += isIncrementing? (+1):(-1);
+	return value;
+}
+
 int main(int argc, char **argv) {
 	std::vector<std::string> args;
     for(int i = 1; i < argc; i++){
@@ -21,8 +37,11 @@ int main(int argc, char **argv) {
 	
 	while (true){
 		now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+		std::cout << "\e[48;5;16m";
 		if (AppSettings::colorshift){
-			std::cout << "\e[48;5;16m\e[" << 31 + (rand() % 8) << "m";
+			std::cout << "\e[" << 31 + (rand() % 8) << "m";
+		} else {
+			std::cout << "\e[38;5;" << gradientalThing() << "m";
 		}
 		std::cout << "\e[2J\e[1;1H";
 		std::cout << std::put_time( std::localtime( &now ), "%FT%T%z" );
