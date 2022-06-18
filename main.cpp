@@ -7,21 +7,25 @@
 #include <string>
 #include <vector>
 #include "AppUtil.cpp"
+#include "ShadeThing.cpp"
 
 int gradientalThing(){
-	int value_limits[2] = {235, 255};
-	static int value = 255;
-	static bool isIncrementing = false;
+	static ShadeThing shadeThing = * new ShadeThing((int[2]){240, 255}, 1, 0);
+	return shadeThing.iterate();
+}
 
-	if (value <= value_limits[0]){
-		isIncrementing = true;
-	}
-	if (value >= value_limits[1]){
-		isIncrementing = false;
-	}
 
-	value += isIncrementing? (+1):(-1);
-	return value;
+int *gradientalColorThing(){
+	static ShadeThing shadeThing[3] = {
+		/* red */ * new ShadeThing((int[2]){128, 255}, 0, 10),
+		/* green */ * new ShadeThing((int[2]){128, 255}, 0, 10),
+		/* blue */ * new ShadeThing((int[2]){128, 255}, 0, 10),
+	};
+	static int values[3];
+	for (int i = 0; i < 3; i++){
+		values[i] = shadeThing[i].iterate();
+	}
+	return values;
 }
 
 int main(int argc, char **argv) {
@@ -39,7 +43,9 @@ int main(int argc, char **argv) {
 		now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 		std::cout << "\e[48;5;16m";
 		if (AppSettings::colorshift){
-			std::cout << "\e[" << 31 + (rand() % 8) << "m";
+			int *rgb_values = gradientalColorThing();
+			std::cout << "\e[48;2;0;0;0m";
+			std::cout << "\e[38;2;" << rgb_values[0] << ";" << rgb_values[1] << ";" << rgb_values[2] << "m";
 		} else {
 			std::cout << "\e[38;5;" << gradientalThing() << "m";
 		}
