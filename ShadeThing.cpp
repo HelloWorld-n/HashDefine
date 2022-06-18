@@ -7,6 +7,7 @@ class ShadeThing {
 		bool isIncrementing;
 	public:
 		ShadeThing(int *value_limits, int value_stepMin = 0, int value_stepStep = 1){
+			this->value = this->value_limits[0];
 			for (int i = 0; i < 2; i++){
 				this->value_limits[i] = value_limits[i];
 			}
@@ -14,10 +15,10 @@ class ShadeThing {
 			this->value_stepStep = value_stepStep;
 
 			if (this->value_stepMin < 0){
-				throw "minimum value for `value_stepMin` is 0";
+				throw "Minimum value for `value_stepMin` is 0。";
 			}
 			if (this->value_stepStep < 0){
-				throw "minimum value for `value_stepStep` is 0";
+				throw "Minimum value for `value_stepStep` is 0。";
 			}
 		}
 
