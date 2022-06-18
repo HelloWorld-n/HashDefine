@@ -6,6 +6,8 @@
 
 namespace AppSettings {
 	bool colorshift = false;
+	bool localTimezone = false;
+	bool dualTimezone = false;
 	void apply(std::vector<std::string> args){
 		for (std::string arg: args){
 			std::vector<std::string> option_colorshift = {
@@ -23,6 +25,36 @@ namespace AppSettings {
 				)
 			){
 				colorshift = true;
+			}
+
+			std::vector<std::string> option_localTimezone = {
+				"--local-timezone",
+				"--localTimezone",
+				"--ltz",
+			};
+			if (
+				std::any_of(
+					std::begin(option_localTimezone),
+					std::end(option_localTimezone), 
+					[arg](std::string thing){return arg.compare(thing) == 0;}
+				)
+			){
+				localTimezone = true;
+			}
+
+			std::vector<std::string> option_dualTimezone = {
+				"--dual-timezone",
+				"--dualTimezone",
+				"--dtz",
+			};
+			if (
+				std::any_of(
+					std::begin(option_dualTimezone),
+					std::end(option_dualTimezone), 
+					[arg](std::string thing){return arg.compare(thing) == 0;}
+				)
+			){
+				dualTimezone = true;
 			}
 		}
 	}

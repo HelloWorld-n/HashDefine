@@ -50,7 +50,12 @@ int main(int argc, char **argv) {
 			std::cout << "\e[38;5;" << gradientalThing() << "m";
 		}
 		std::cout << "\e[2J\e[1;1H";
-		std::cout << std::put_time( std::localtime( &now ), "%FT%T%z" );
+		if ((not AppSettings::localTimezone) or AppSettings::dualTimezone){
+			std::cout << std::put_time( std::gmtime( &now ), "%FT%TZ" ) << "\n";
+		}
+		if (AppSettings::localTimezone or AppSettings::dualTimezone){
+			std::cout << std::put_time( std::localtime( &now ), "%FT%T%z" ) << "\n";
+		} 
 		std::cout << std::flush;
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
