@@ -35,4 +35,4 @@ Activates at:
 * `--dtz`  
 。  
 
-Displays time at global timezone and local timezone。  
+Displays time at local timezone and global timezone。  
