@@ -14,6 +14,7 @@ Activates at:
 * `--colorshift`  
 * `--rainbow`  
 。   
+
 Has more variety of color。  
 
 # **LocalTimezone**
@@ -23,6 +24,7 @@ Activates at:
 * `--localTimezone`  
 * `--ltz`  
 。  
+
 Time is displayed in local timezone。  
 
 # **DualTimezone**
@@ -32,4 +34,5 @@ Activates at:
 * `--dualTimezone`  
 * `--dtz`  
 。  
+
 Displays time at global timezone and local timezone。  
