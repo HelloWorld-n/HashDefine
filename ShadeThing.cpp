@@ -7,7 +7,7 @@ class ShadeThing {
 		bool isIncrementing;
 	public:
 		ShadeThing(int *value_limits, int value_stepMin = 0, int value_stepStep = 1){
-			this->value = this->value_limits[0];
+			this->value = value_limits[0];
 			for (int i = 0; i < 2; i++){
 				this->value_limits[i] = value_limits[i];
 			}
