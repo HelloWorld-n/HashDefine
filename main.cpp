@@ -10,7 +10,7 @@
 #include "ShadeThing.cpp"
 
 int gradientalThing(){
-	static ShadeThing shadeThing = * new ShadeThing((int[2]){240, 255}, 1, 0);
+	static ShadeThing shadeThing = * new ShadeThing((int[2]){128, 255}, 25, 0);
 	return shadeThing.iterate();
 }
 
@@ -53,8 +53,27 @@ int main(int argc, char **argv) {
 			int *rgb_values = gradientalColorThing();
 			std::cout << "\e[48;2;0;0;0m";
 			std::cout << "\e[38;2;" << rgb_values[0] << ";" << rgb_values[1] << ";" << rgb_values[2] << "m";
+			if (AppSettings::backgroundColor){
+				std::cout << "\e[48;2;" << (
+					(rgb_values[0] % 128) / 8
+				) << ";" << (
+					(rgb_values[1] % 128) / 8
+				) << ";" << (
+					(rgb_values[2] % 128) / 8
+				) << "m";
+			}
 		} else {
-			std::cout << "\e[38;5;" << gradientalThing() << "m";
+			int rgb_value = gradientalThing();
+			std::cout << "\e[38;2;" << rgb_value << ";" << rgb_value << ";" << rgb_value << "m";
+			if (AppSettings::backgroundColor){
+				std::cout << "\e[48;2;" << (
+					(rgb_value % 128) / 8
+				) << ";" << (
+					(rgb_value % 128) / 8
+				) << ";" << (
+					(rgb_value % 128) / 8
+				) << "m";
+			}
 		}
 		std::cout << "\e[2J\e[1;1H";
 		if (not AppSettings::localTimezone){

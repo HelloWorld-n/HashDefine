@@ -17,7 +17,7 @@ Activates at:
 
 Has more variety of color。  
 
-# **LocalTimezone**
+## **LocalTimezone**
 
 Activates at:  
 * `--local-timezone`  
@@ -27,7 +27,7 @@ Activates at:
 
 Default time is in local timezone。    
 
-# **DualTimezone**
+## **DualTimezone**
 
 Activates at:  
 * `--dual-timezone`  
@@ -37,4 +37,13 @@ Activates at:
 
 Displays all times。  
 
+## **BackgroundColor**
+
+Activates at:
+* `--background-color`
+* `--backgroundColor`
+* `--bgc`
+。  
+
+Background color is shifted as a backgrounder equivalent of foreground color。  
 
