@@ -14,7 +14,6 @@ int gradientalThing(){
 	return shadeThing.iterate();
 }
 
-
 int *gradientalColorThing(){
 	static ShadeThing shadeThing[3] = {
 		/* red */ * new ShadeThing((int[2]){128, 255}, 0, 10),
@@ -26,6 +25,14 @@ int *gradientalColorThing(){
 		values[i] = shadeThing[i].iterate();
 	}
 	return values;
+}
+
+std::_Put_time<char> getGlobalTime(std::time_t the_time_t){
+	return std::put_time( std::gmtime( &the_time_t ), "%FT%TZ" );
+}
+
+std::_Put_time<char> getLocalTime(std::time_t the_time_t){
+	return std::put_time( std::localtime( &the_time_t ), "%FT%T%z" );
 }
 
 int main(int argc, char **argv) {
@@ -50,11 +57,16 @@ int main(int argc, char **argv) {
 			std::cout << "\e[38;5;" << gradientalThing() << "m";
 		}
 		std::cout << "\e[2J\e[1;1H";
-		if ((not AppSettings::localTimezone) or AppSettings::dualTimezone){
-			std::cout << std::put_time( std::gmtime( &now ), "%FT%TZ" ) << "\n";
-		}
-		if (AppSettings::localTimezone or AppSettings::dualTimezone){
-			std::cout << std::put_time( std::localtime( &now ), "%FT%T%z" ) << "\n";
+		if (not AppSettings::localTimezone){
+			std::cout << getGlobalTime(now) << "\n";
+			if (AppSettings::dualTimezone){
+				std::cout << getLocalTime(now) << "\n";
+			}
+		} else {
+			std::cout << getLocalTime(now) << "\n";
+			if (AppSettings::dualTimezone){
+				std::cout << getGlobalTime(now) << "\n";
+			}
 		} 
 		std::cout << std::flush;
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));

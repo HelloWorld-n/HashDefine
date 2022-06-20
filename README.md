@@ -1,7 +1,7 @@
 # About
 
 Displays time formatted in [&#x5B;ISO 8601&#x5D;](https://simple.wikipedia.org/wiki/ISO_8601)。
-Time is by default displayed in [&#x5B;global timezone&#x5D;](https://simple.wikipedia.org/wiki/Coordinated_Universal_Time)。
+By default only one is displayed、 and that time is in [&#x5B;global timezone&#x5D;](https://simple.wikipedia.org/wiki/Coordinated_Universal_Time)。  
 
 # Options
 
@@ -25,7 +25,7 @@ Activates at:
 * `--ltz`  
 。  
 
-Time is displayed in local timezone。  
+Displayed time is in local timezone。    
 
 # **DualTimezone**
 
@@ -35,4 +35,6 @@ Activates at:
 * `--dtz`  
 。  
 
-Displays time at local timezone and global timezone。  
+Displays all times。  
+
+
