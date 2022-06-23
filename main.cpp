@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <chrono>
 #include <iomanip>
 #include <ctime>
@@ -42,13 +43,20 @@ int main(int argc, char **argv) {
     };
 	AppSettings::apply(args);
 
+	if (AppSettings::help){
+		std::fstream file;
+		file.open("./README.md");
+		std::cout << file.rdbuf() << "\n";
+		file.close();
+		return 0;
+	}
+
 	std::time_t now;
 	srand(time(0));
 	
 	
 	while (true){
 		now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-		std::cout << "\e[48;5;16m";
 		if (AppSettings::colorshift){
 			int *rgb_values = gradientalColorThing();
 			std::cout << "\e[48;2;0;0;0m";
